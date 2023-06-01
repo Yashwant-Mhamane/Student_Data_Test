@@ -3,6 +3,8 @@ package com.test.atdev.student_data.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import java.util.Objects;
+
 @Entity
 public class Student {
     @Id
@@ -63,4 +65,17 @@ public class Student {
         this.studentMarks = studentMarks;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return studentId == student.studentId && studentMarks == student.studentMarks && Objects.equals(studentName, student.studentName) && Objects.equals(studentClass, student.studentClass) && Objects.equals(studentMailId, student.studentMailId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(studentId, studentName, studentClass, studentMailId, studentMarks);
+    }
+    
 }
