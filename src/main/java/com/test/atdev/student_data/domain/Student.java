@@ -12,4 +12,14 @@ public class Student {
     private String studentMailId;
     private int studentMarks;
 
+    public Student(int studentId, String studentName, String studentClass, String studentMailId, int studentMarks) {
+        this.studentId = studentId;
+        this.studentName = studentName;
+        this.studentClass = studentClass;
+        this.studentMailId = studentMailId;
+        this.studentMarks = studentMarks;
+    }
+
+    public Student() {
+    }
 }
