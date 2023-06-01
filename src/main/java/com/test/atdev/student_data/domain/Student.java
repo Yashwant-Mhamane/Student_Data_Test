@@ -22,4 +22,45 @@ public class Student {
 
     public Student() {
     }
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public String getStudentClass() {
+        return studentClass;
+    }
+
+    public void setStudentClass(String studentClass) {
+        this.studentClass = studentClass;
+    }
+
+    public String getStudentMailId() {
+        return studentMailId;
+    }
+
+    public void setStudentMailId(String studentMailId) {
+        this.studentMailId = studentMailId;
+    }
+
+    public int getStudentMarks() {
+        return studentMarks;
+    }
+
+    public void setStudentMarks(int studentMarks) {
+        this.studentMarks = studentMarks;
+    }
+
 }
