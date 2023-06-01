@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
@@ -44,7 +46,14 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public boolean deleteStudent(Integer studentId) {
-        return false;
+    public boolean deleteStudent(Integer studentId) throws StudentNotFoundException {
+        Optional<Student> optionalStudent = studentRepository.findById(studentId);
+        if (optionalStudent.isPresent()) {
+            studentRepository.deleteById(studentId);
+            return true;
+        } else {
+            throw new StudentNotFoundException("There is no any Student in the database.");
+        }
+
     }
 }
