@@ -43,10 +43,10 @@ public class StudentServiceImpl implements StudentService {
         Optional<Student> studentToBeUpdated = studentRepository.findById(studentId);
         if (studentToBeUpdated.isPresent()) {
             Student student = studentToBeUpdated.get();
-            student.setStudentName(updatedStudent.getStudentName());
-            student.setStudentClass(updatedStudent.getStudentClass());
-            student.setStudentMailId(updatedStudent.getStudentMailId());
-            student.setStudentMarks(updatedStudent.getStudentMarks());
+            if (updatedStudent.getStudentName() != null) student.setStudentName(updatedStudent.getStudentName());
+            if (updatedStudent.getStudentClass() != null) student.setStudentClass(updatedStudent.getStudentClass());
+            if (updatedStudent.getStudentMailId() != null) student.setStudentMailId(updatedStudent.getStudentMailId());
+            if (updatedStudent.getStudentMarks() !=0) student.setStudentMarks(updatedStudent.getStudentMarks());
 
             studentRepository.save(student);
         } else {
