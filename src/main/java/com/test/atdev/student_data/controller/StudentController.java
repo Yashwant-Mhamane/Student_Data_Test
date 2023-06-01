@@ -6,10 +6,7 @@ import com.test.atdev.student_data.exception.StudentNotFoundException;
 import com.test.atdev.student_data.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,6 +36,19 @@ public class StudentController {
         } else
             return new ResponseEntity<>("Student with this ID already present.",HttpStatus.NOT_ACCEPTABLE);
 
+    }
+
+    @PutMapping("/students/edit/{studentId}")
+    public ResponseEntity<?> updateStudent(@PathVariable Integer studentId, @RequestBody Student updateStudent) throws StudentNotFoundException {
+
+        List<Student> studentList = studentService.getAllStudents();
+        if (studentList.isEmpty()) {
+            return new ResponseEntity<>("No student found with this ID.",HttpStatus.NOT_FOUND);
+        }
+        else {
+            studentService.updateStudentDetails(updateStudent, studentId);
+            return new ResponseEntity<>(updateStudent, HttpStatus.OK);
+        }
     }
 
 }
