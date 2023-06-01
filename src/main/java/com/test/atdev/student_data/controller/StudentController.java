@@ -51,4 +51,17 @@ public class StudentController {
         }
     }
 
+    @DeleteMapping("/students/delete/{studentID}")
+    public ResponseEntity<?> deleteStudent(@PathVariable Integer studentID) throws StudentNotFoundException {
+
+        List<Student> studentList = studentService.getAllStudents();
+        if (studentList.isEmpty()) {
+            return new ResponseEntity<>("No student found with this ID.",HttpStatus.NOT_FOUND);
+        }
+        else {
+            studentService.deleteStudent(studentID);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
 }
