@@ -22,11 +22,9 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getAllStudents() throws StudentNotFoundException {
         List<Student> studentList = (List<Student>) studentRepository.findAll();
-        if(studentList.isEmpty())
-        {
+        if (studentList.isEmpty()) {
             throw new StudentNotFoundException("There is no any Student in the database.");
-        }
-        else {
+        } else {
             return studentList;
         }
     }
@@ -41,9 +39,22 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public boolean updateStudentDetails(Student updatedStudent, Integer studentId) {
-        return false;
+    public boolean updateStudentDetails(Student updatedStudent, Integer studentId) throws StudentNotFoundException {
+        Optional<Student> studentToBeUpdated = studentRepository.findById(studentId);
+        if (studentToBeUpdated.isPresent()) {
+            Student student = studentToBeUpdated.get();
+            student.setStudentName(updatedStudent.getStudentName());
+            student.setStudentClass(updatedStudent.getStudentClass());
+            student.setStudentMailId(updatedStudent.getStudentMailId());
+            student.setStudentMarks(updatedStudent.getStudentMarks());
+
+            studentRepository.save(student);
+        } else {
+            throw new StudentNotFoundException("There is no any Student with "+studentId+ " in the database.");
+        }
+        return true;
     }
+
 
     @Override
     public boolean deleteStudent(Integer studentId) throws StudentNotFoundException {
