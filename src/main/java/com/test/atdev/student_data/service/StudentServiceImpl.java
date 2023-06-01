@@ -1,6 +1,7 @@
 package com.test.atdev.student_data.service;
 
 import com.test.atdev.student_data.domain.Student;
+import com.test.atdev.student_data.exception.StudentAlreadyFoundException;
 import com.test.atdev.student_data.exception.StudentNotFoundException;
 import com.test.atdev.student_data.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student addStudent(Student student) {
-        return null;
+    public Student addStudent(Student student) throws StudentAlreadyFoundException {
+        if (studentRepository.findById(student.getStudentId()).isPresent())
+            throw new StudentAlreadyFoundException("Student with this Id already present");
+        else
+            return studentRepository.save(student);
     }
+
 
     @Override
     public boolean updateStudentDetails(Student updatedStudent, Integer studentId) {
