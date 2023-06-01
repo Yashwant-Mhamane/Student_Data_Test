@@ -1,10 +1,19 @@
 package com.test.atdev.student_data.service;
 
 import com.test.atdev.student_data.domain.Student;
+import com.test.atdev.student_data.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
+    private final StudentRepository studentRepository;
+
+    @Autowired
+    public StudentServiceImpl(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
+
     @Override
     public List<Student> getAllStudents() {
         return null;
