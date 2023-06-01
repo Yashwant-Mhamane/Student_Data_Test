@@ -17,8 +17,15 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getAllStudents() {
-        return null;
+    public List<Student> getAllStudents() throws StudentNotFoundException {
+        List<Student> studentList = (List<Student>) studentRepository.findAll();
+        if(studentList.isEmpty())
+        {
+            throw new StudentNotFoundException("There is no any Student in the database.");
+        }
+        else {
+            return studentList;
+        }
     }
 
     @Override
